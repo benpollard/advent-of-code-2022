@@ -35,11 +35,14 @@ with open('./input.txt') as f:
             instructions.append(parseInstruction(line))
 
 for instruction in instructions:
+    tmp = []
     for x in range(instruction[0]):
         fromIdx = instruction[1] - 1
-        toIdx = instruction[2] - 1
         if len(stacks[fromIdx]) > 0:
-            stacks[toIdx].append(stacks[fromIdx].pop())
+            tmp.append(stacks[fromIdx].pop())
+    for x in range(len(tmp)):
+        toIdx = instruction[2] - 1
+        stacks[toIdx].append(tmp.pop())
 
 ans = ""
 for stack in stacks:
